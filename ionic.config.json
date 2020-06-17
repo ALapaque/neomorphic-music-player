@@ -1,0 +1,7 @@
+{
+  "name": "neomorphic-music-player",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

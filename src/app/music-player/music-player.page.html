@@ -1,0 +1,49 @@
+<form>
+
+  <div class="title">
+    <h1>{{ musics[index].title }}</h1>
+    <h3>{{ musics[index].artist }}</h3>
+  </div>
+
+  <div class="thumbnail">
+    <img src="{{ musics[index].thumbnail }}">
+  </div>
+
+  <div class="segment">
+    <button class="unit" type="button" (click)="nextOrPrevious('previous')">
+      <ion-icon name="play-back-outline"></ion-icon>
+    </button>
+    <button class="unit" type="button"
+            *ngIf="!isPlaying"
+            (click)="play()">
+      <ion-icon name="play-outline"></ion-icon>
+    </button>
+    <button class="unit" type="button" [class.active]="isPlaying"
+            *ngIf="isPlaying"
+            (click)="pause()">
+      <ion-icon name="pause-outline"></ion-icon>
+    </button>
+    <button class="unit" type="button"
+            [disabled]="index === musics.length -1"
+            (click)="nextOrPrevious('next')">
+      <ion-icon name="play-forward-outline"></ion-icon>
+    </button>
+  </div>
+
+  <ion-item>
+    <span class="range-time">{{ transformToReadableTime(currentTime) }}</span>
+    <ion-range #trackRange
+               color="danger"
+               pin="true"
+               [value]="currentTime"
+               (click)="durationChanged()"
+               [min]="0"
+               [max]="duration">
+    </ion-range>
+    <span class="range-time">{{ transformToReadableTime(duration) }}</span>
+  </ion-item>
+
+
+</form>
+
+<audio #audioPlayer src="{{ musics[index].url }}"></audio>

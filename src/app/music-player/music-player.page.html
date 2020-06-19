@@ -36,6 +36,7 @@
     <!-- FAVORITE BUTTON -->
     <div class="action-btn-wrapper">
       <button class="btn btn-round btn-medium"
+              [class.active]="musics[index].isFavorite"
               [class.liked]="musics[index].isFavorite"
               (click)="addToFavorite()">
         <div class="btn-inner">

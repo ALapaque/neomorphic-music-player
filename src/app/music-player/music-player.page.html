@@ -1,33 +1,105 @@
-<form>
+<div class="music-player-container"
+     fxLayout="column"
+     fxLayoutAlign="space-between center"
+     fxLayoutGap="1rem">
 
-  <div class="title">
-    <h1>{{ musics[index].title }}</h1>
-    <h3>{{ musics[index].artist }}</h3>
+  <div class="header" fxLayout="row" fxLayoutAlign="space-around center">
+    <button class="btn btn-round btn-medium" (click)="triggerMenu()">
+      <div class="btn-inner">
+        <i class="material-icons-round">menu</i>
+      </div>
+    </button>
+
+    <div fxLayout="column"
+         fxLayoutAlign="center center"
+         fxLayoutGap="0.25rem">
+      <h1>{{ musics[index].title }}</h1>
+      <h3>{{ musics[index].artist }}</h3>
+    </div>
+
+    <button class="btn btn-round btn-medium" (click)="volume()">
+      <div class="btn-inner">
+        <i class="material-icons-round">volume_up</i>
+      </div>
+    </button>
   </div>
 
   <div class="thumbnail">
     <img src="{{ musics[index].thumbnail }}">
   </div>
 
-  <div class="segment">
-    <button class="unit" type="button" (click)="nextOrPrevious('previous')">
-      <ion-icon name="play-back-outline"></ion-icon>
+  <div class="button-wrapper"
+       fxLayout="row"
+       fxLayoutAlign="space-evenly center"
+       fxLayoutGap="0.85rem">
+
+    <!-- FAVORITE BUTTON -->
+    <div class="action-btn-wrapper">
+      <button class="btn btn-round btn-medium"
+              [class.liked]="musics[index].isFavorite"
+              (click)="addToFavorite()">
+        <div class="btn-inner">
+          <i class="material-icons-round">favorite</i>
+        </div>
+      </button>
+    </div>
+
+    <!-- SKIP-PREVIOUS BUTTON -->
+    <button class="btn btn-round"
+            [class.disabled]="index === 0"
+            (click)="index !== 0 ? nextOrPrevious('previous') : ''">
+      <div class="btn-inner">
+        <i class="material-icons-round">skip_previous</i>
+      </div>
     </button>
-    <button class="unit" type="button"
+
+    <!-- PLAY BUTTON -->
+    <button class="btn btn-round"
             *ngIf="!isPlaying"
             (click)="play()">
-      <ion-icon name="play-outline"></ion-icon>
+      <div class="btn-inner">
+        <i class="material-icons-round">play_arrow</i>
+      </div>
     </button>
-    <button class="unit" type="button" [class.active]="isPlaying"
+
+    <button class="btn btn-round"
             *ngIf="isPlaying"
+            [class.active]="isPlaying"
             (click)="pause()">
-      <ion-icon name="pause-outline"></ion-icon>
+      <div class="btn-inner">
+        <i class="material-icons-round">pause</i>
+      </div>
     </button>
-    <button class="unit" type="button"
-            [disabled]="index === musics.length -1"
+
+    <!-- SKIP-NEXT BUTTON -->
+    <button class="btn btn-round"
+            [class.disabled]="index == musics.length - 1"
             (click)="nextOrPrevious('next')">
-      <ion-icon name="play-forward-outline"></ion-icon>
+      <div class="btn-inner">
+        <i class="material-icons-round">skip_next</i>
+      </div>
     </button>
+
+    <!-- CONTAINER SHUFFLE & REPLAY BUTTON -->
+    <div class="action-btn-wrapper"
+         fxLayout="column"
+         fxLayoutAlign="start center"
+    >
+      <!-- REPLAY BUTTON -->
+      <button class="btn btn-round btn-small">
+        <div class="btn-inner">
+          <i class="material-icons-round">loop</i>
+        </div>
+      </button>
+
+      <!-- SHUFFLE BUTTON -->
+      <button class="btn btn-round btn-small">
+        <div class="btn-inner">
+          <i class="material-icons-round">shuffle</i>
+        </div>
+      </button>
+    </div>
+
   </div>
 
   <ion-item>
@@ -44,6 +116,5 @@
   </ion-item>
 
 
-</form>
-
-<audio #audioPlayer src="{{ musics[index].url }}"></audio>
+  <audio #audioPlayer src="{{ musics[index].url }}"></audio>
+</div>

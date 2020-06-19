@@ -5,4 +5,5 @@ export interface Music {
     thumbnail: string;
     url: string;
     length: string;
+    isFavorite: boolean;
 }

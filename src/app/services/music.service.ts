@@ -18,6 +18,7 @@ export class MusicService {
       title: '',
       thumbnail: '',
       url: '',
+      isFavorite: false,
     };
   }
 
@@ -30,6 +31,7 @@ export class MusicService {
         title: 'Gomenasai II',
         thumbnail: 'assets/thumbnails/gomenasai2.jpg',
         url: 'assets/songs/Gomenasai_II.mp3',
+        isFavorite: true,
       },
       {
         id: 2,
@@ -38,6 +40,7 @@ export class MusicService {
         title: 'Toosie Slide',
         thumbnail: 'assets/thumbnails/Drake-ToosieSlide.jpg',
         url: 'assets/songs/Drake-ToosieSlide.mp3',
+        isFavorite: false,
       }
     ]);
   }

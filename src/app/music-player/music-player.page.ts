@@ -36,6 +36,13 @@ export class MusicPlayerPage implements OnInit, AfterViewInit {
     this._bindPlayerEvents();
   }
 
+  refreshMusics() {
+    this._musicService.getMusics().subscribe(
+        (musics: Music[]) => {
+          this.musics = musics;
+        });
+  }
+
   transformToReadableTime(amount: number): string {
     const minutes: number = Math.floor(amount / 60);
     const seconds = amount - minutes * 60;
@@ -44,11 +51,8 @@ export class MusicPlayerPage implements OnInit, AfterViewInit {
 
   }
 
-  refreshMusics() {
-    this._musicService.getMusics().subscribe(
-        (musics: Music[]) => {
-          this.musics = musics;
-        });
+  addToFavorite() {
+    this.musics[this.index].isFavorite = !this.musics[this.index].isFavorite;
   }
 
   play() {
